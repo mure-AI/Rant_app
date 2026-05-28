@@ -154,13 +154,78 @@ h3 {
 
 .rant-form {
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
-.rant-form label {
+.rant-form label,
+.mood-picker legend {
   color: var(--ink);
   font-size: 0.9rem;
   font-weight: 800;
+}
+
+.mood-picker {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.mood-picker legend {
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.mood-options,
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mood-options label {
+  cursor: pointer;
+}
+
+.mood-options input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.mood-options span,
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: #fffdfb;
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.mood-options input:checked + span,
+.filter-button.is-active {
+  border-color: rgba(233, 79, 55, 0.45);
+  color: var(--accent-dark);
+  background: rgba(233, 79, 55, 0.1);
+}
+
+.mood-options span:hover,
+.filter-button:hover {
+  transform: translateY(-1px);
 }
 
 textarea {
@@ -220,6 +285,14 @@ textarea:focus {
   font-weight: 800;
 }
 
+.filter-bar {
+  margin-top: 22px;
+}
+
+.filter-button {
+  border-radius: 8px;
+}
+
 .empty-state {
   margin: auto 0;
   padding: 32px;
@@ -262,12 +335,47 @@ textarea:focus {
 .rant-meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
   color: var(--muted);
   font-size: 0.78rem;
   font-weight: 750;
   text-transform: uppercase;
+}
+
+.rant-meta .delete-button {
+  margin-left: auto;
+}
+
+.mood-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 0 9px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.mood-angry {
+  background: #b9311e;
+}
+
+.mood-annoyed {
+  background: #a85a18;
+}
+
+.mood-confused {
+  background: #1d5f73;
+}
+
+.mood-petty {
+  background: #6f4aa0;
+}
+
+.mood-funny {
+  background: #26834d;
 }
 
 .delete-button {

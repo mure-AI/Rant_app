@@ -7,13 +7,22 @@ const emptyState = document.querySelector("#emptyState");
 const charCount = document.querySelector("#charCount");
 const rantCount = document.querySelector("#rantCount");
 const clearAllButton = document.querySelector("#clearAllButton");
+const filterBar = document.querySelector("#filterBar");
+const emptyTitle = document.querySelector("#emptyTitle");
+const emptyMessage = document.querySelector("#emptyMessage");
 
 let rants = loadRants();
+let activeFilter = "All";
 
 function loadRants() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : [];
+    const parsed = saved ? JSON.parse(saved) : [];
+    return parsed.map((rant) => ({
+      ...rant,
+      id: rant.id || createId(),
+      mood: getMood(rant),
+    }));
   } catch {
     return [];
   }
@@ -37,8 +46,8 @@ function pluralizePosts(count) {
 }
 
 function createId() {
-  if (crypto.randomUUID) {
-    return crypto.randomUUID();
+  if (globalThis.crypto?.randomUUID) {
+    return globalThis.crypto.randomUUID();
   }
 
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -49,12 +58,16 @@ function updateCharacterCount() {
 }
 
 function renderFeed() {
-  feed.innerHTML = "";
-  rantCount.textContent = pluralizePosts(rants.length);
-  emptyState.hidden = rants.length > 0;
-  clearAllButton.disabled = rants.length === 0;
+  const visibleRants = activeFilter === "All" ? rants : rants.filter((rant) => getMood(rant) === activeFilter);
 
-  rants.forEach((rant, index) => {
+  feed.innerHTML = "";
+  rantCount.textContent =
+    activeFilter === "All" ? pluralizePosts(rants.length) : `${pluralizePosts(visibleRants.length)} shown`;
+  emptyState.hidden = visibleRants.length > 0;
+  clearAllButton.disabled = rants.length === 0;
+  updateEmptyState();
+
+  visibleRants.forEach((rant) => {
     const item = document.createElement("li");
     item.className = "rant-card";
 
@@ -64,26 +77,46 @@ function renderFeed() {
     const time = document.createElement("span");
     time.textContent = formatTime(rant.createdAt);
 
+    const mood = document.createElement("span");
+    mood.className = `mood-pill mood-${getMood(rant).toLowerCase()}`;
+    mood.textContent = getMood(rant);
+
     const deleteButton = document.createElement("button");
     deleteButton.className = "delete-button";
     deleteButton.type = "button";
     deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", () => deleteRant(index));
+    deleteButton.addEventListener("click", () => deleteRant(rant.id));
 
     const copy = document.createElement("p");
     copy.textContent = rant.text;
 
-    meta.append(time, deleteButton);
+    meta.append(time, mood, deleteButton);
     item.append(meta, copy);
     feed.append(item);
   });
 }
 
-function addRant(text) {
+function getMood(rant) {
+  return rant.mood || "Annoyed";
+}
+
+function updateEmptyState() {
+  if (rants.length === 0) {
+    emptyTitle.textContent = "Nothing has escaped yet.";
+    emptyMessage.textContent = "Your first rant will land here, timestamped and ready to stare back at you.";
+    return;
+  }
+
+  emptyTitle.textContent = `No ${activeFilter.toLowerCase()} rants yet.`;
+  emptyMessage.textContent = "Try another filter or post one with this mood.";
+}
+
+function addRant(text, mood) {
   rants = [
     {
       id: createId(),
       text,
+      mood,
       createdAt: new Date().toISOString(),
     },
     ...rants,
@@ -93,8 +126,8 @@ function addRant(text) {
   renderFeed();
 }
 
-function deleteRant(index) {
-  rants = rants.filter((_, currentIndex) => currentIndex !== index);
+function deleteRant(id) {
+  rants = rants.filter((rant) => rant.id !== id);
   saveRants();
   renderFeed();
 }
@@ -108,8 +141,11 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  addRant(text);
+  const mood = new FormData(form).get("mood") || "Annoyed";
+
+  addRant(text, mood);
   form.reset();
+  form.elements.mood.value = mood;
   updateCharacterCount();
   input.focus();
 });
@@ -125,6 +161,19 @@ clearAllButton.addEventListener("click", () => {
   saveRants();
   renderFeed();
   input.focus();
+});
+
+filterBar.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-filter]");
+  if (!button) {
+    return;
+  }
+
+  activeFilter = button.dataset.filter;
+  filterBar.querySelectorAll(".filter-button").forEach((filterButton) => {
+    filterButton.classList.toggle("is-active", filterButton === button);
+  });
+  renderFeed();
 });
 
 updateCharacterCount();
