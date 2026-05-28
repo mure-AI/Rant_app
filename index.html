@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rant</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="composer-panel" aria-labelledby="app-title">
+        <div class="brand-row">
+          <div>
+            <p class="eyebrow">private beta</p>
+            <h1 id="app-title">Rant</h1>
+          </div>
+          <button class="icon-button" id="clearAllButton" type="button" title="Clear feed" aria-label="Clear feed">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <p class="intro">
+          Drop the thought before it chews through your afternoon.
+        </p>
+
+        <form id="rantForm" class="rant-form">
+          <label for="rantInput">What needs to get out?</label>
+          <textarea
+            id="rantInput"
+            name="rant"
+            rows="8"
+            maxlength="600"
+            placeholder="Type the thing. No polish required."
+            required
+          ></textarea>
+
+          <div class="form-footer">
+            <span id="charCount" class="char-count">0 / 600</span>
+            <button class="primary-button" type="submit">Post rant</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="feed-panel" aria-labelledby="feed-title">
+        <div class="feed-header">
+          <div>
+            <p class="eyebrow">live feed</p>
+            <h2 id="feed-title">Recent rants</h2>
+          </div>
+          <span id="rantCount" class="count-pill">0 posts</span>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <h3>Nothing has escaped yet.</h3>
+          <p>Your first rant will land here, timestamped and ready to stare back at you.</p>
+        </div>
+
+        <ol id="rantFeed" class="rant-feed" aria-live="polite"></ol>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
