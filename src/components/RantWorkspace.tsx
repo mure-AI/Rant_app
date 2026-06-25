@@ -9,11 +9,25 @@ import type { AnalysisResult } from "@/types/analysis";
 import { TextRantInput } from "./TextRantInput";
 import { VoiceRecorder } from "./VoiceRecorder";
 import { TranscriptEditor } from "./TranscriptEditor";
-import { ResultsSummary } from "./ResultsSummary";
 import { Disclaimer } from "./Disclaimer";
 import { AudioPlayer } from "./AudioPlayer";
 
 type Mode = "text" | "voice";
+
+function describeSaveStage(stage: string | undefined) {
+  switch (stage) {
+    case "auth":
+      return "authentication";
+    case "validation":
+      return "payload validation";
+    case "entry_insert":
+      return "saving the entry row";
+    case "action_steps_insert":
+      return "saving the action steps";
+    default:
+      return "saving the entry";
+  }
+}
 
 export function RantWorkspace() {
   const router = useRouter();
@@ -96,21 +110,22 @@ export function RantWorkspace() {
       return;
     }
 
-    const supabase = createSupabaseBrowserClient();
-    const {
-      data: { user }
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      setStatus("Analysis ready. Log in to save this entry to your private history.");
-      return;
-    }
-
-    const entryId = createClientId();
     let audioPath = "";
 
     if (inputType === "voice" && voiceBlob) {
-      audioPath = `${user.id}/${entryId}.webm`;
+      const supabase = createSupabaseBrowserClient();
+      const {
+        data: { user }
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        setStatus("Analysis ready. Log in to save this entry to your private history.");
+        return;
+      }
+
+      // Generate a UUID for audio file path
+      const tempId = crypto.randomUUID?.() || createClientId();
+      audioPath = `${user.id}/${tempId}.webm`;
       const { error: uploadError } = await supabase.storage.from("rant-audio").upload(audioPath, voiceBlob, {
         contentType: "audio/webm",
         upsert: true
@@ -124,8 +139,8 @@ export function RantWorkspace() {
     const response = await fetch("/api/entries", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({
-        id: entryId,
         inputType,
         originalText: inputType === "text" ? inputText : undefined,
         transcript: inputType === "voice" ? inputText : undefined,
@@ -137,20 +152,29 @@ export function RantWorkspace() {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "Could not save entry.");
+      if (response.status === 401) {
+        setError(data.error || "Log in to save this entry.");
+        return;
+      }
+
+      const stage = describeSaveStage(data.stage);
+      throw new Error(`${data.error || "Could not save entry."} (${stage})`);
     }
 
     router.push(`/results/${data.id}`);
   }
 
   return (
-    <main className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-6xl gap-6 px-4 pb-10 sm:px-6 lg:grid-cols-[0.85fr_1.15fr]">
+    <main className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-3xl gap-6 px-4 pb-10 sm:px-6">
       <section className="rounded-lg border border-stone-300 bg-white/85 p-5 shadow-soft sm:p-7">
         <p className="text-xs font-black uppercase tracking-[0.18em] text-clay">private beta</p>
         <h1 className="mt-3 text-5xl font-black leading-none tracking-tight sm:text-7xl">How is today going?</h1>
         <p className="mt-5 max-w-md text-lg leading-8 text-stone-700">
           Drop the thought before it chews through your afternoon. Rant will turn it into a clearer summary and a few
           doable next steps.
+        </p>
+        <p className="mt-4 max-w-md text-sm leading-6 text-stone-600">
+          <span className="font-bold">Use text or voice.</span> Once Rant has enough context, it will show the emotion, likely problem, and next steps.
         </p>
 
         <div className="mt-7 grid grid-cols-2 gap-2 rounded-full bg-stone-200 p-1">
@@ -194,23 +218,6 @@ export function RantWorkspace() {
           {error ? <p className="rounded-lg bg-red-50 p-3 text-sm font-bold text-red-700">{error}</p> : null}
           <Disclaimer />
         </div>
-      </section>
-
-      <section className="min-h-[420px] rounded-lg border border-stone-300 bg-white/70 p-5 shadow-soft sm:p-7">
-        {analysis ? (
-          <ResultsSummary analysis={analysis} />
-        ) : (
-          <div className="flex h-full min-h-[420px] items-center justify-center rounded-lg border border-dashed border-stone-300 p-8 text-center">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-tide">waiting room</p>
-              <h2 className="mt-3 text-3xl font-black">Your clarity will land here.</h2>
-              <p className="mt-3 max-w-md leading-7 text-stone-600">
-                Use text or voice. Once Rant has enough context, it will show the emotion, likely problem, and next
-                steps.
-              </p>
-            </div>
-          </div>
-        )}
       </section>
     </main>
   );

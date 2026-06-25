@@ -26,8 +26,11 @@ export default function LoginPage() {
         throw loginError;
       }
 
-      router.push("/");
+      // Wait a moment for auth state to propagate
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       router.refresh();
+      router.push("/");
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Could not log in.");
     } finally {

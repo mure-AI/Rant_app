@@ -3,6 +3,7 @@ import { AppHeader } from "@/components/AppHeader";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { FeedbackButtons } from "@/components/FeedbackButtons";
 import { ResultsSummary } from "@/components/ResultsSummary";
+import { FollowUpInput } from "@/components/FollowUpInput";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import type { AnalysisResult } from "@/types/analysis";
 
@@ -85,6 +86,8 @@ export default async function ResultsPage({ params }: ResultsPageProps) {
                 <FeedbackButtons />
               </div>
             </section>
+
+            <FollowUpInput entryId={params.id} />
           </>
         ) : null}
       </main>
