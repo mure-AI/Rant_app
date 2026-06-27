@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { Loader2, Mic2 } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabaseClient";
 import { createClientId } from "@/lib/utils";
 import type { AnalysisResult } from "@/types/analysis";
@@ -40,6 +40,7 @@ export function RantWorkspace() {
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [sourceText, setSourceText] = useState("");
   const [isBusy, setIsBusy] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const canUseSupabase = useMemo(
     () => Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
@@ -50,6 +51,7 @@ export function RantWorkspace() {
     setError("");
     setStatus("Listening for the shape under the noise...");
     setIsBusy(true);
+    setIsAnalyzing(true);
 
     try {
       const response = await fetch("/api/analyze", {
@@ -72,6 +74,7 @@ export function RantWorkspace() {
       setError(caught instanceof Error ? caught.message : "Something went wrong.");
     } finally {
       setIsBusy(false);
+      setIsAnalyzing(false);
     }
   }
 
@@ -162,6 +165,26 @@ export function RantWorkspace() {
     }
 
     router.push(`/results/${data.id}`);
+  }
+
+  if (isAnalyzing) {
+    return (
+      <main className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-3xl place-items-center px-4 pb-10 sm:px-6">
+        <section className="grid w-full max-w-md justify-items-center gap-6 rounded-lg border border-stone-300 bg-white/85 p-8 text-center shadow-soft">
+          <span className="grid size-16 place-items-center rounded-full bg-ink text-white animate-pulse">
+            <Mic2 aria-hidden="true" size={28} />
+          </span>
+          <div className="grid gap-2">
+            <h1 className="text-3xl font-black">Analyzing your rant...</h1>
+            <p className="text-sm font-bold text-stone-600">Hang tight while Rant turns this into clarity.</p>
+          </div>
+          <p className="flex items-center gap-2 text-sm font-bold text-stone-600">
+            <Loader2 className="animate-spin" size={16} aria-hidden="true" />
+            {status || "Working on your result..."}
+          </p>
+        </section>
+      </main>
+    );
   }
 
   return (
