@@ -170,15 +170,15 @@ export function RantWorkspace() {
   if (isAnalyzing) {
     return (
       <main className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-3xl place-items-center px-4 pb-10 sm:px-6">
-        <section className="grid w-full max-w-md justify-items-center gap-6 rounded-lg border border-stone-300 bg-white/85 p-8 text-center shadow-soft">
-          <span className="grid size-16 place-items-center rounded-full bg-ink text-white animate-pulse">
+        <section className="grid w-full max-w-md justify-items-center gap-5 rounded-xl border border-line bg-white p-8 text-center">
+          <span className="grid size-14 place-items-center rounded-md bg-tide text-white animate-pulse">
             <Mic2 aria-hidden="true" size={28} />
           </span>
           <div className="grid gap-2">
-            <h1 className="text-3xl font-black">Analyzing your rant...</h1>
-            <p className="text-sm font-bold text-stone-600">Hang tight while Rant turns this into clarity.</p>
+            <h1 className="text-2xl font-semibold tracking-tight">Analyzing your rant...</h1>
+            <p className="text-sm text-muted">Hang tight while Rant turns this into clarity.</p>
           </div>
-          <p className="flex items-center gap-2 text-sm font-bold text-stone-600">
+          <p className="flex items-center gap-2 text-sm text-muted">
             <Loader2 className="animate-spin" size={16} aria-hidden="true" />
             {status || "Working on your result..."}
           </p>
@@ -188,22 +188,24 @@ export function RantWorkspace() {
   }
 
   return (
-    <main className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-3xl gap-6 px-4 pb-10 sm:px-6">
-      <section className="rounded-lg border border-stone-300 bg-white/85 p-5 shadow-soft sm:p-7">
-        <p className="text-xs font-black uppercase tracking-[0.18em] text-clay">private beta</p>
-        <h1 className="mt-3 text-5xl font-black leading-none tracking-tight sm:text-7xl">How is today going?</h1>
-        <p className="mt-5 max-w-md text-lg leading-8 text-stone-700">
+    <main className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-3xl gap-6 px-4 pb-10 pt-6 sm:px-6">
+      <section className="grid gap-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-tide">private beta</p>
+        <h1 className="max-w-2xl text-4xl font-semibold tracking-tight sm:text-6xl">How is today going?</h1>
+        <p className="max-w-xl text-base leading-7 text-muted sm:text-lg">
           Drop the thought before it chews through your afternoon. Rant will turn it into a clearer summary and a few
           doable next steps.
         </p>
-        <p className="mt-4 max-w-md text-sm leading-6 text-stone-600">
-          <span className="font-bold">Use text or voice.</span> Once Rant has enough context, it will show the emotion, likely problem, and next steps.
+        <p className="max-w-xl text-sm leading-6 text-muted">
+          Use text or voice. Once Rant has enough context, it will show the emotion, likely problem, and next steps.
         </p>
+      </section>
 
-        <div className="mt-7 grid grid-cols-2 gap-2 rounded-full bg-stone-200 p-1">
+      <section className="grid gap-6 rounded-xl border border-line bg-white p-5 sm:p-6">
+        <div className="grid grid-cols-2 gap-2 rounded-lg border border-line bg-white p-1">
           {(["text", "voice"] as const).map((nextMode) => (
             <button
-              className="focus-ring rounded-full px-4 py-3 text-sm font-black capitalize data-[active=true]:bg-white data-[active=true]:shadow"
+              className="focus-ring rounded-md px-4 py-3 text-sm font-semibold capitalize text-muted data-[active=true]:bg-paper data-[active=true]:text-tide"
               data-active={mode === nextMode}
               key={nextMode}
               onClick={() => setMode(nextMode)}
@@ -214,7 +216,7 @@ export function RantWorkspace() {
           ))}
         </div>
 
-        <div className="mt-6">
+        <div>
           {mode === "text" ? (
             <TextRantInput disabled={isBusy} onSubmit={(text) => analyzeText(text, "text")} />
           ) : (
@@ -231,14 +233,14 @@ export function RantWorkspace() {
           )}
         </div>
 
-        <div className="mt-6 grid gap-3">
+        <div className="grid gap-3 border-t border-line pt-5">
           {status ? (
-            <p className="flex items-center gap-2 text-sm font-bold text-stone-600">
+            <p className="flex items-center gap-2 text-sm text-muted">
               {isBusy ? <Loader2 className="animate-spin" size={16} aria-hidden="true" /> : null}
               {status}
             </p>
           ) : null}
-          {error ? <p className="rounded-lg bg-red-50 p-3 text-sm font-bold text-red-700">{error}</p> : null}
+          {error ? <p className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p> : null}
           <Disclaimer />
         </div>
       </section>

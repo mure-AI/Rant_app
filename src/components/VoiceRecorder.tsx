@@ -62,11 +62,11 @@ export function VoiceRecorder({ disabled, onRecordingReady }: VoiceRecorderProps
   }
 
   return (
-    <div className="grid gap-4 rounded-lg border border-stone-300 bg-white/80 p-4">
+    <div className="grid gap-4 rounded-lg border border-line bg-white p-4">
       <div className="flex flex-wrap items-center gap-3">
         {!isRecording ? (
           <button
-            className="focus-ring inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 font-black text-white transition hover:-translate-y-0.5 disabled:opacity-60"
+            className="focus-ring inline-flex items-center gap-2 rounded-md bg-tide px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#52212c] disabled:opacity-60"
             disabled={disabled}
             onClick={startRecording}
             type="button"
@@ -76,7 +76,7 @@ export function VoiceRecorder({ disabled, onRecordingReady }: VoiceRecorderProps
           </button>
         ) : (
           <button
-            className="focus-ring inline-flex items-center gap-2 rounded-full bg-clay px-5 py-3 font-black text-white"
+            className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink"
             onClick={stopRecording}
             type="button"
           >
@@ -88,7 +88,7 @@ export function VoiceRecorder({ disabled, onRecordingReady }: VoiceRecorderProps
         {blob ? (
           <>
             <button
-              className="focus-ring inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white px-4 py-3 text-sm font-black text-stone-700"
+              className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-muted"
               onClick={resetRecording}
               type="button"
             >
@@ -96,7 +96,7 @@ export function VoiceRecorder({ disabled, onRecordingReady }: VoiceRecorderProps
               Re-record
             </button>
             <button
-              className="focus-ring rounded-full bg-tide px-5 py-3 font-black text-white transition hover:-translate-y-0.5 disabled:opacity-60"
+              className="focus-ring rounded-md bg-tide px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#52212c] disabled:opacity-60"
               disabled={disabled}
               onClick={() => onRecordingReady(blob)}
               type="button"

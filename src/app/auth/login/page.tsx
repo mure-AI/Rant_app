@@ -40,18 +40,18 @@ export default function LoginPage() {
 
   return (
     <main className="mx-auto grid min-h-screen w-full max-w-md place-items-center px-4">
-      <form className="grid w-full gap-4 rounded-lg border border-stone-300 bg-white/85 p-6 shadow-soft" onSubmit={handleSubmit}>
+      <form className="grid w-full gap-4 rounded-xl border border-line bg-white p-6" onSubmit={handleSubmit}>
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-clay">welcome back</p>
-          <h1 className="mt-2 text-4xl font-black">Log in</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-tide">welcome back</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight">Log in</h1>
         </div>
-        <input className="focus-ring rounded-lg border border-stone-300 px-4 py-3" name="email" placeholder="Email" required type="email" />
-        <input className="focus-ring rounded-lg border border-stone-300 px-4 py-3" name="password" placeholder="Password" required type="password" />
-        {error ? <p className="text-sm font-bold text-red-700">{error}</p> : null}
-        <button className="focus-ring rounded-full bg-ink px-5 py-3 font-black text-white disabled:opacity-60" disabled={isBusy} type="submit">
+        <input className="focus-ring rounded-lg border border-line bg-white px-4 py-3" name="email" placeholder="Email" required type="email" />
+        <input className="focus-ring rounded-lg border border-line bg-white px-4 py-3" name="password" placeholder="Password" required type="password" />
+        {error ? <p className="text-sm text-red-700">{error}</p> : null}
+        <button className="focus-ring rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white disabled:opacity-60" disabled={isBusy} type="submit">
           Log in
         </button>
-        <Link className="text-sm font-bold text-tide" href="/auth/signup">
+        <Link className="text-sm font-medium text-tide" href="/auth/signup">
           Need an account? Sign up
         </Link>
       </form>

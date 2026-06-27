@@ -56,9 +56,9 @@ export default async function ResultsPage({ params }: ResultsPageProps) {
       <AppHeader />
       <main className="mx-auto grid w-full max-w-5xl gap-6 px-4 pb-10 sm:px-6">
         {error ? (
-          <div className="rounded-lg border border-stone-300 bg-white/85 p-6">
-            <p className="font-bold text-stone-700">{error}</p>
-            <Link className="mt-4 inline-flex rounded-full bg-ink px-5 py-3 font-black text-white" href="/auth/login">
+          <div className="rounded-xl border border-line bg-white p-6">
+            <p className="text-sm text-ink/80">{error}</p>
+            <Link className="mt-4 inline-flex rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white" href="/auth/login">
               Log in
             </Link>
           </div>
@@ -67,21 +67,21 @@ export default async function ResultsPage({ params }: ResultsPageProps) {
         {analysis ? (
           <>
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-clay">saved result</p>
-              <h1 className="mt-2 text-5xl font-black">What Rant heard</h1>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-tide">saved result</p>
+              <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">What Rant heard</h1>
             </div>
 
             {signedAudioUrl ? (
-              <section className="rounded-lg border border-stone-300 bg-white/85 p-5">
-                <h2 className="mb-3 text-xl font-black">Original recording</h2>
+              <section className="rounded-xl border border-line bg-white p-5">
+                <h2 className="mb-3 text-xl font-semibold tracking-tight">Original recording</h2>
                 <AudioPlayer src={signedAudioUrl} />
               </section>
             ) : null}
 
             <ResultsSummary analysis={analysis} />
 
-            <section className="rounded-lg border border-stone-300 bg-white/85 p-5">
-              <h2 className="text-xl font-black">Was this useful?</h2>
+            <section className="rounded-xl border border-line bg-white p-5">
+              <h2 className="text-xl font-semibold tracking-tight">Was this useful?</h2>
               <div className="mt-3">
                 <FeedbackButtons />
               </div>

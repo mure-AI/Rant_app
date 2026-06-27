@@ -67,13 +67,13 @@ export default function HistoryPage() {
       <AppHeader />
       <main className="mx-auto w-full max-w-5xl px-4 pb-10 sm:px-6">
         <div className="mb-6">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-clay">saved clarity</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-tide">saved clarity</p>
           <h1 className="mt-2 text-5xl font-black">History</h1>
         </div>
 
         {isLoading ? (
-          <div className="rounded-lg border border-stone-300 bg-white/85 p-6">
-            <p className="flex items-center gap-2 font-bold text-stone-700">
+          <div className="rounded-xl border border-line bg-white p-6">
+            <p className="flex items-center gap-2 text-sm text-muted">
               <Loader2 className="animate-spin" size={16} />
               Loading your history...
             </p>
@@ -81,18 +81,18 @@ export default function HistoryPage() {
         ) : null}
 
         {error ? (
-          <div className="rounded-lg border border-stone-300 bg-white/85 p-6">
-            <p className="font-bold text-stone-700">{error}</p>
-            <Link className="mt-4 inline-flex rounded-full bg-ink px-5 py-3 font-black text-white" href="/auth/login">
+          <div className="rounded-xl border border-line bg-white p-6">
+            <p className="text-sm text-ink/80">{error}</p>
+            <Link className="mt-4 inline-flex rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white" href="/auth/login">
               Log in
             </Link>
           </div>
         ) : null}
 
         {!error && !isLoading && entries.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-stone-300 bg-white/70 p-8 text-center">
-            <h2 className="text-2xl font-black">No saved entries yet.</h2>
-            <Link className="mt-4 inline-flex rounded-full bg-clay px-5 py-3 font-black text-white" href="/">
+          <div className="rounded-xl border border-dashed border-line bg-white p-8 text-center">
+            <h2 className="text-2xl font-semibold tracking-tight">No saved entries yet.</h2>
+            <Link className="mt-4 inline-flex rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white" href="/">
               Start a rant
             </Link>
           </div>

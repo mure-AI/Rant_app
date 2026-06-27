@@ -46,9 +46,9 @@ export function FollowUpInput({ entryId, onSubmit }: FollowUpInputProps) {
   }
 
   return (
-    <section className="rounded-lg border border-stone-300 bg-white/85 p-5 sm:p-7">
-      <h2 className="text-xl font-black">Did I understand you?</h2>
-      <p className="mt-2 text-sm text-stone-600">If not, please share more context to help refine the analysis.</p>
+    <section className="rounded-xl border border-line bg-white p-5 sm:p-6">
+      <h2 className="text-xl font-semibold tracking-tight">Did I understand you?</h2>
+      <p className="mt-2 text-sm text-muted">If not, please share more context to help refine the analysis.</p>
       
       <form onSubmit={handleSubmit} className="mt-4 grid gap-3">
         <textarea
@@ -56,20 +56,20 @@ export function FollowUpInput({ entryId, onSubmit }: FollowUpInputProps) {
           onChange={(e) => setFollowUpText(e.target.value)}
           disabled={isSubmitting}
           placeholder="Share more details or clarify what I might have missed..."
-          className="focus-ring min-h-[100px] rounded-lg border border-stone-300 p-3 text-sm placeholder-stone-400 disabled:bg-stone-100"
+          className="focus-ring min-h-[100px] rounded-lg border border-line bg-white p-3 text-sm text-ink placeholder:text-slate-400 disabled:bg-slate-100"
         />
         
         <button
           type="submit"
           disabled={isSubmitting || !followUpText.trim()}
-          className="focus-ring flex w-full items-center justify-center gap-2 rounded-lg bg-ink px-4 py-3 font-black text-white disabled:bg-stone-400 sm:w-auto"
+          className="focus-ring flex w-full items-center justify-center gap-2 rounded-md bg-tide px-4 py-2.5 text-sm font-semibold text-white disabled:bg-slate-400 sm:w-auto"
         >
           {isSubmitting ? <Loader2 className="animate-spin" size={16} /> : null}
           {isSubmitting ? "Saving..." : "Share More"}
         </button>
 
         {message && (
-          <p className={`text-sm font-bold ${message.includes("Failed") || message.includes("wrong") ? "text-red-700" : "text-green-700"}`}>
+          <p className={`text-sm font-medium ${message.includes("Failed") || message.includes("wrong") ? "text-red-700" : "text-moss"}`}>
             {message}
           </p>
         )}

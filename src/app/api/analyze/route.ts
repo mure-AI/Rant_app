@@ -16,7 +16,7 @@ export async function POST(request: Request) {
       return NextResponse.json(urgentSafetyAnalysis(payload.inputText));
     }
 
-    const openai = getOpenAIClient();
+    const openai = null;
 
     if (!openai) {
       const fallback = fallbackAnalysis(payload.inputText);

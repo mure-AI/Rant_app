@@ -1,5 +1,16 @@
 import type { Metadata } from "next";
+import { Instrument_Sans, Inter } from "next/font/google";
 import "./globals.css";
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument-sans"
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter"
+});
 
 export const metadata: Metadata = {
   title: "Rant",
@@ -13,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">{children}</body>
+      <body className={`${instrumentSans.variable} ${inter.variable} antialiased`}>{children}</body>
     </html>
   );
 }
