@@ -78,31 +78,26 @@ export function RantWorkspace() {
     }
   }
 
-  async function transcribeRecording(blob: Blob) {
+  /**
+   * Called when VoiceRecorder finishes capturing audio.
+   * If the browser provided a transcript via SpeechRecognition, use it directly.
+   * Otherwise leave it blank for the user to type in TranscriptEditor.
+   */
+  function handleVoiceReady(blob: Blob, browserTranscript?: string) {
     setError("");
     setVoiceBlob(blob);
     setVoicePreviewUrl(URL.createObjectURL(blob));
-    setStatus("Transcribing your recording...");
     setIsBusy(true);
 
-    try {
-      const formData = new FormData();
-      formData.append("audio", blob, "rant.webm");
-      const response = await fetch("/api/transcribe", {
-        method: "POST",
-        body: formData
-      });
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Transcription failed.");
-      }
-
-      setTranscript(data.transcript);
+    if (browserTranscript) {
+      // Browser generated a transcript — set it directly, no API call needed
+      setTranscript(browserTranscript);
       setStatus("Transcript ready. Give it a quick look before analysis.");
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Could not transcribe this recording.");
-    } finally {
+      setIsBusy(false);
+    } else {
+      // No browser transcription (e.g. Firefox) — user types manually
+      setTranscript("");
+      setStatus("Recording ready. Type what you said below, then analyze.");
       setIsBusy(false);
     }
   }
@@ -221,7 +216,7 @@ export function RantWorkspace() {
             <TextRantInput disabled={isBusy} onSubmit={(text) => analyzeText(text, "text")} />
           ) : (
             <div className="grid gap-4">
-              <VoiceRecorder disabled={isBusy} onRecordingReady={transcribeRecording} />
+              <VoiceRecorder disabled={isBusy} onRecordingReady={handleVoiceReady} />
               {voicePreviewUrl ? <AudioPlayer src={voicePreviewUrl} /> : null}
               <TranscriptEditor
                 disabled={isBusy}
