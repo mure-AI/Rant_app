@@ -56,20 +56,20 @@ export function FollowUpInput({ entryId, onSubmit }: FollowUpInputProps) {
           onChange={(e) => setFollowUpText(e.target.value)}
           disabled={isSubmitting}
           placeholder="Share more details or clarify what I might have missed..."
-          className="focus-ring min-h-[100px] rounded-lg border border-line bg-white p-3 text-sm text-ink placeholder:text-slate-400 disabled:bg-slate-100"
+          className="focus-ring min-h-[100px] rounded-lg border border-line bg-white p-3 text-sm text-charcoal placeholder:text-slate-400 disabled:bg-slate-100"
         />
         
         <button
           type="submit"
           disabled={isSubmitting || !followUpText.trim()}
-          className="focus-ring flex w-full items-center justify-center gap-2 rounded-md bg-tide px-4 py-2.5 text-sm font-semibold text-white disabled:bg-slate-400 sm:w-auto"
+          className="focus-ring flex w-full items-center justify-center gap-2 rounded-md bg-maroon px-4 py-2.5 text-sm font-semibold text-white disabled:bg-slate-400 sm:w-auto"
         >
           {isSubmitting ? <Loader2 className="animate-spin" size={16} /> : null}
           {isSubmitting ? "Saving..." : "Share More"}
         </button>
 
         {message && (
-          <p className={`text-sm font-medium ${message.includes("Failed") || message.includes("wrong") ? "text-red-700" : "text-moss"}`}>
+          <p className={`text-sm font-medium ${message.includes("Failed") || message.includes("wrong") ? "text-red-700" : "text-olive"}`}>
             {message}
           </p>
         )}

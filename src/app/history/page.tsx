@@ -67,7 +67,7 @@ export default function HistoryPage() {
       <AppHeader />
       <main className="mx-auto w-full max-w-5xl px-4 pb-10 sm:px-6">
         <div className="mb-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-tide">saved clarity</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-maroon">saved clarity</p>
           <h1 className="mt-2 text-5xl font-black">History</h1>
         </div>
 
@@ -82,8 +82,8 @@ export default function HistoryPage() {
 
         {error ? (
           <div className="rounded-xl border border-line bg-white p-6">
-            <p className="text-sm text-ink/80">{error}</p>
-            <Link className="mt-4 inline-flex rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white" href="/auth/login">
+            <p className="text-sm text-charcoal/80">{error}</p>
+            <Link className="mt-4 inline-flex rounded-md bg-maroon px-5 py-3 text-sm font-semibold text-white" href="/auth/login">
               Log in
             </Link>
           </div>
@@ -92,7 +92,7 @@ export default function HistoryPage() {
         {!error && !isLoading && entries.length === 0 ? (
           <div className="rounded-xl border border-dashed border-line bg-white p-8 text-center">
             <h2 className="text-2xl font-semibold tracking-tight">No saved entries yet.</h2>
-            <Link className="mt-4 inline-flex rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white" href="/">
+            <Link className="mt-4 inline-flex rounded-md bg-maroon px-5 py-3 text-sm font-semibold text-white" href="/">
               Start a rant
             </Link>
           </div>

@@ -57,8 +57,8 @@ export default async function ResultsPage({ params }: ResultsPageProps) {
       <main className="mx-auto grid w-full max-w-5xl gap-6 px-4 pb-10 sm:px-6">
         {error ? (
           <div className="rounded-xl border border-line bg-white p-6">
-            <p className="text-sm text-ink/80">{error}</p>
-            <Link className="mt-4 inline-flex rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white" href="/auth/login">
+            <p className="text-sm text-charcoal/80">{error}</p>
+            <Link className="mt-4 inline-flex rounded-md bg-maroon px-5 py-3 text-sm font-semibold text-white" href="/auth/login">
               Log in
             </Link>
           </div>
@@ -67,7 +67,7 @@ export default async function ResultsPage({ params }: ResultsPageProps) {
         {analysis ? (
           <>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-tide">saved result</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-maroon">saved result</p>
               <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">What Rant heard</h1>
             </div>
 

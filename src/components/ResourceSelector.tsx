@@ -14,12 +14,12 @@ export function ResourceSelector({ recommended, value, onChange }: ResourceSelec
   return (
     <div className="grid gap-3">
       <p className="text-sm font-bold text-muted">
-        Recommended first: <span className="text-ink">{recommended === "none" ? "tool" : recommended}</span>
+        Recommended first: <span className="text-charcoal">{recommended === "none" ? "tool" : recommended}</span>
       </p>
       <div className="flex flex-wrap gap-2">
         {options.map((option) => (
           <button
-            className="focus-ring rounded-lg border border-line bg-white px-4 py-2 text-sm font-black capitalize text-muted data-[active=true]:bg-tide data-[active=true]:text-white"
+            className="focus-ring rounded-lg border border-line bg-white px-4 py-2 text-sm font-black capitalize text-muted data-[active=true]:bg-maroon data-[active=true]:text-white"
             data-active={value === option}
             key={option}
             onClick={() => onChange(option)}

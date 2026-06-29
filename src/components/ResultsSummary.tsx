@@ -14,7 +14,7 @@ export function ResultsSummary({ analysis }: ResultsSummaryProps) {
 
       <div className="rounded-xl border border-line bg-white p-5">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-md border border-line bg-white px-3 py-1 text-sm font-semibold text-tide">{analysis.emotion}</span>
+          <span className="rounded-md border border-line bg-white px-3 py-1 text-sm font-semibold text-maroon">{analysis.emotion}</span>
           <span className="rounded-md border border-line bg-white px-3 py-1 text-sm font-semibold text-muted">
             {analysis.problemType.replace("_", " ")}
           </span>
@@ -39,7 +39,7 @@ export function ResultsSummary({ analysis }: ResultsSummaryProps) {
               <ActionStepsList steps={analysis.nextSteps} />
             </div>
           </div>
-          <div className="rounded-xl border border-line bg-white p-4 font-medium text-ink">{analysis.reflectiveQuestion}</div>
+          <div className="rounded-xl border border-line bg-white p-4 font-medium text-charcoal">{analysis.reflectiveQuestion}</div>
           <SpeakResponseButton analysis={analysis} />
         </div>
       </div>

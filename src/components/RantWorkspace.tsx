@@ -171,7 +171,7 @@ export function RantWorkspace() {
     return (
       <main className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-3xl place-items-center px-4 pb-10 sm:px-6">
         <section className="grid w-full max-w-md justify-items-center gap-5 rounded-xl border border-line bg-white p-8 text-center">
-          <span className="grid size-14 place-items-center rounded-md bg-tide text-white animate-pulse">
+          <span className="grid size-14 place-items-center rounded-md bg-maroon text-white animate-pulse">
             <Mic2 aria-hidden="true" size={28} />
           </span>
           <div className="grid gap-2">
@@ -190,7 +190,7 @@ export function RantWorkspace() {
   return (
     <main className="mx-auto grid min-h-[calc(100vh-88px)] w-full max-w-3xl gap-6 px-4 pb-10 pt-6 sm:px-6">
       <section className="grid gap-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-tide">private beta</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-maroon">private beta</p>
         <h1 className="max-w-2xl text-4xl font-semibold tracking-tight sm:text-6xl">How is today going?</h1>
         <p className="max-w-xl text-base leading-7 text-muted sm:text-lg">
           Drop the thought before it chews through your afternoon. Rant will turn it into a clearer summary and a few
@@ -205,7 +205,7 @@ export function RantWorkspace() {
         <div className="grid grid-cols-2 gap-2 rounded-lg border border-line bg-white p-1">
           {(["text", "voice"] as const).map((nextMode) => (
             <button
-              className="focus-ring rounded-md px-4 py-3 text-sm font-semibold capitalize text-muted data-[active=true]:bg-paper data-[active=true]:text-tide"
+              className="focus-ring rounded-md px-4 py-3 text-sm font-semibold capitalize text-muted data-[active=true]:bg-cream data-[active=true]:text-maroon"
               data-active={mode === nextMode}
               key={nextMode}
               onClick={() => setMode(nextMode)}

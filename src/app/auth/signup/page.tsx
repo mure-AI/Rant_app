@@ -41,17 +41,17 @@ export default function SignupPage() {
     <main className="mx-auto grid min-h-screen w-full max-w-md place-items-center px-4">
       <form className="grid w-full gap-4 rounded-xl border border-line bg-white p-6" onSubmit={handleSubmit}>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-tide">private history</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-maroon">private history</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight">Create account</h1>
         </div>
         <input className="focus-ring rounded-lg border border-line bg-white px-4 py-3" name="email" placeholder="Email" required type="email" />
         <input className="focus-ring rounded-lg border border-line bg-white px-4 py-3" minLength={6} name="password" placeholder="Password" required type="password" />
         {error ? <p className="text-sm text-red-700">{error}</p> : null}
-        {message ? <p className="text-sm text-moss">{message}</p> : null}
-        <button className="focus-ring rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white disabled:opacity-60" disabled={isBusy} type="submit">
+        {message ? <p className="text-sm text-olive">{message}</p> : null}
+        <button className="focus-ring rounded-md bg-maroon px-5 py-3 text-sm font-semibold text-white disabled:opacity-60" disabled={isBusy} type="submit">
           Sign up
         </button>
-        <Link className="text-sm font-medium text-tide" href="/auth/login">
+        <Link className="text-sm font-medium text-maroon" href="/auth/login">
           Already have an account? Log in
         </Link>
       </form>

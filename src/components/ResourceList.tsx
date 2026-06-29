@@ -13,7 +13,7 @@ export function ResourceList({ resources }: ResourceListProps) {
     <div className="grid gap-3">
       {resources.map((resource) => (
         <a
-          className="focus-ring rounded-xl border border-line bg-white p-4 transition hover:border-tide"
+          className="focus-ring rounded-xl border border-line bg-white p-4 transition hover:border-terracotta"
           href={resource.href}
           key={resource.id}
           rel="noreferrer"

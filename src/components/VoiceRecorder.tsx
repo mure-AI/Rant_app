@@ -66,7 +66,7 @@ export function VoiceRecorder({ disabled, onRecordingReady }: VoiceRecorderProps
       <div className="flex flex-wrap items-center gap-3">
         {!isRecording ? (
           <button
-            className="focus-ring inline-flex items-center gap-2 rounded-md bg-tide px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#52212c] disabled:opacity-60"
+            className="focus-ring inline-flex items-center gap-2 rounded-md bg-maroon px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#4a1f2a] disabled:opacity-60"
             disabled={disabled}
             onClick={startRecording}
             type="button"
@@ -76,7 +76,7 @@ export function VoiceRecorder({ disabled, onRecordingReady }: VoiceRecorderProps
           </button>
         ) : (
           <button
-            className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink"
+              className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2.5 text-sm font-semibold text-charcoal"
             onClick={stopRecording}
             type="button"
           >
@@ -96,7 +96,7 @@ export function VoiceRecorder({ disabled, onRecordingReady }: VoiceRecorderProps
               Re-record
             </button>
             <button
-              className="focus-ring rounded-md bg-tide px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#52212c] disabled:opacity-60"
+              className="focus-ring rounded-md bg-maroon px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#4a1f2a] disabled:opacity-60"
               disabled={disabled}
               onClick={() => onRecordingReady(blob)}
               type="button"

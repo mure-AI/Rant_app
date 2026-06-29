@@ -5,20 +5,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#0f172a",
-        muted: "#64748b",
-        line: "#e5e7eb",
-        paper: "#fafbfa",
-        clay: "#0f766e",
-        tide: "#0f766e",
-        moss: "#7bae7f"
+        maroon: "#6B2D3A",
+        terracotta: "#B5654D",
+        clay: "#C48A69",
+        olive: "#7A8F63",
+        cream: "#F8F5F1",
+        charcoal: "#2E2A27",
+        muted: "#8C8985",
+        line: "#E5E2DD",
       },
       boxShadow: {
-        soft: "none"
-      }
-    }
+        soft: "none",
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };
 
 export default config;

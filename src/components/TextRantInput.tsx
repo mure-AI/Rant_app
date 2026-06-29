@@ -22,10 +22,10 @@ export function TextRantInput({ disabled, onSubmit }: TextRantInputProps) {
         onSubmit(text);
       }}
     >
-      <label className="grid gap-2 text-sm font-semibold text-ink" htmlFor="rant">
+      <label className="grid gap-2 text-sm font-semibold text-charcoal" htmlFor="rant">
         What needs to get out?
         <textarea
-          className="focus-ring min-h-44 resize-y rounded-lg border border-line bg-white p-4 text-base leading-7 text-ink placeholder:text-slate-400"
+          className="focus-ring min-h-44 resize-y rounded-lg border border-line bg-white p-4 text-base leading-7 text-charcoal placeholder:text-slate-400"
           disabled={disabled}
           id="rant"
           maxLength={4000}
@@ -35,7 +35,7 @@ export function TextRantInput({ disabled, onSubmit }: TextRantInputProps) {
         />
       </label>
       <button
-        className="focus-ring rounded-md bg-tide px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#0b655e] disabled:opacity-60"
+        className="focus-ring rounded-md bg-maroon px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#4a1f2a] disabled:opacity-60"
         disabled={disabled}
         type="submit"
       >

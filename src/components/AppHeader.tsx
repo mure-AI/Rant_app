@@ -48,8 +48,8 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/85 backdrop-blur-sm">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-      <Link className="flex items-center gap-3 font-semibold tracking-tight text-ink" href="/">
-        <span className="grid size-9 place-items-center rounded-md bg-tide text-white">
+      <Link className="flex items-center gap-3 font-semibold tracking-tight text-charcoal" href="/">
+        <span className="grid size-9 place-items-center rounded-md bg-maroon text-white">
           <Mic2 size={19} aria-hidden="true" />
         </span>
         <span className="text-lg">Rant</span>
@@ -57,7 +57,7 @@ export function AppHeader() {
 
       <nav className="flex items-center gap-2">
         <Link
-          className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:border-tide hover:text-tide"
+          className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2 text-sm font-semibold text-charcoal transition hover:border-terracotta hover:text-terracotta"
           href="/history"
         >
           <History size={16} aria-hidden="true" />
@@ -71,7 +71,7 @@ export function AppHeader() {
                 <span className="text-sm text-muted">{user.email}</span>
                 <button
                   onClick={handleLogout}
-                  className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:border-tide hover:text-tide"
+                  className="focus-ring inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2 text-sm font-semibold text-charcoal transition hover:border-terracotta hover:text-terracotta"
                 >
                   <LogOut size={16} aria-hidden="true" />
                   Log out
@@ -79,7 +79,7 @@ export function AppHeader() {
               </div>
             ) : (
               <Link
-                className="focus-ring inline-flex items-center gap-2 rounded-md bg-tide px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#52212c]"
+                className="focus-ring inline-flex items-center gap-2 rounded-md bg-maroon px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#4a1f2a]"
                 href="/auth/login"
               >
                 <LogIn size={16} aria-hidden="true" />

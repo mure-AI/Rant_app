@@ -25,7 +25,7 @@ export function SpeakResponseButton({ analysis }: SpeakResponseButtonProps) {
 
   return (
     <button
-      className="focus-ring inline-flex items-center gap-2 rounded-lg border border-line bg-white px-4 py-3 text-sm font-black text-ink"
+      className="focus-ring inline-flex items-center gap-2 rounded-lg border border-line bg-white px-4 py-3 text-sm font-black text-charcoal"
       onClick={speak}
       type="button"
     >
