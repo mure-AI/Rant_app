@@ -14,7 +14,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Rant",
-  description: "Turn emotional overload into structured clarity and next steps."
+  description: "Turn emotional overload into structured clarity and next steps.",
+  icons: {
+    icon: "/favicon.svg"
+  }
 };
 
 export default function RootLayout({
